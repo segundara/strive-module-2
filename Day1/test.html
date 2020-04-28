@@ -1,0 +1,93 @@
+<html>
+    <head>
+    <base target="_top">
+    <?!= HtmlService.createHtmlOutputFromFile('stylesheet').getContent(); ?>
+
+    <style>
+        .radio-item {
+      display: inline-block;
+      position: relative;
+      padding: 0 6px;
+      margin: 10px 0 0;
+    }
+
+    .radio-item input[type='radio'] {
+      display: none;
+    }
+
+    .radio-item label {
+      color: #666;
+      font-weight: normal;
+    }
+
+    .radio-item label:before {
+      content: "";
+      display: inline-block;
+      position: relative;
+      top: 5px;
+      margin: 0 5px 0 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 11px;
+      border: 2px solid #004c97;
+      background-color: transparent;}
+
+    .radio-item input[type=radio]:checked + label:after {
+      border-radius: 11px;
+      width: 12px;
+      height: 12px;
+      position: absolute;
+      top: 11px;
+      left: 12px;
+      content: " ";
+      display: block;
+      background: #004c97;
+    }
+    </style>
+    </head>
+    <body>
+        <form id="colorChoose">
+            <div class="firstBox">
+                <br>
+                <div id="mainContainer">
+                </div>
+            </div>
+        </form>
+
+        <script>
+            var toAdd = document.createElement("div");
+
+            var colors = [ 
+            ['Dark Grey', 'dark_grey', '#4d4d4d'],
+            ['Medium Grey', 'medium_grey', '#717171'],
+            ['Medium Dark Grey', 'medium_dark_grey', '#9a9a9a'],
+            ['Default Grey','light_grey','#c1c1c1'],
+            ['47th Shade of Grey', 'lighter_grey', '#e0e0e0']]
+
+            for (var i = 0; i < colors.length; i++) {
+                var newDiv = document.createElement('div');
+                var newInput = document.createElement('input');
+                var newLabel = document.createElement('LABEL');
+
+                newDiv.className = 'radio-item';
+
+                newInput.type = "radio";
+                newInput.id = 'I'+colors[i][1];
+                newInput.name = "colorsman";
+                newInput.value = colors[i][1];
+
+
+                newLabel.style.color = colors[i][2];
+                newLabel.innerText=colors[i][0];
+                newLabel.setAttribute("for",'I'+colors[i][1]);
+
+                newDiv.appendChild(newInput);
+                newDiv.appendChild(newLabel);
+
+                toAdd.appendChild(newDiv);
+
+            }
+            document.getElementById('mainContainer').appendChild(toAdd);
+        </script>
+    </body>
+</html>
