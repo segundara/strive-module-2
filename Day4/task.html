@@ -1,0 +1,215 @@
+<!doctype html>
+<!--
+    WELCOME TO THE STRIVE TEAM GENERATOR!
+    The app is pretty straight forward:
+    - The user can add a list of names
+    - The user can set the number of teams
+    - Every time the user clicks on the "assign" button, a random name is placed in a team and removed from the list
+    - Each team should be inside a "column"
+    - [EXTRA] Create a button to remove an user from a team, putting him back in the main list
+    - [EXTRA] Create a button to reset the state of the app
+-->
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+      <div class="container" id="main">
+          <div class="row my-3">
+              <div class="col">
+                <div class="input-group mb-3">
+                    <input type="text" id="getName" class="form-control" placeholder="Give player name" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                    </div>
+                </div>
+              </div>
+          </div>
+          <div class="row my-3">
+              <div class="col">
+                <div class="input-group">
+                    <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                      <option selected>Select number of teams</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                      <option value="4">Four</option>
+                      <option value="5">Five</option>
+                      <option value="6">Six</option>
+                    </select>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" id="createTeam">Button</button>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row my-3">
+              <div class="col">
+                <div class="input-group">
+                    <select class="custom-select" id="insertInto" aria-label="Example select with button addon">
+                      <option selected>Name to be into Team...</option>
+                      <option value="1">First</option>
+                      <option value="2">Second</option>
+                      <option value="3">Third</option>
+                      <option value="4">Fourth</option>
+                      <option value="5">Fifth</option>
+                      <option value="6">Sixth</option>
+                    </select>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" id="assign">Button</button>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row my-3">
+              <div class="col">
+                <ul class="list-group" id="nameList">
+
+                </ul>
+              </div>
+          </div>
+          <div class="row my-3" id="teamList"></div>
+      </div>
+
+      <script>
+          let teamCol
+          let containerDiv = document.querySelector('#main')
+          let teamDiv = document.querySelector('#teamList')
+          let nameButton = document.querySelector('#button-addon2');
+          nameButton.addEventListener('click', nameToList);
+          let teamButton = document.querySelector('#createTeam');
+          teamButton.addEventListener('click', genTeam);
+          let assignButton = document.querySelector('#assign');
+          assignButton.addEventListener('click', assignTeam);
+
+          let numOfTeams = document.createElement('div')
+          let ul = document.createElement('ul')
+          let li = document.createElement('li')
+
+          numOfTeams.className = 'col'
+          ul.className = 'list-group'
+          li.className = 'list-group-item'
+
+          function nameToList(params) {
+              let dName = document.querySelector('#getName').value
+              let addName = document.querySelector('#nameList')
+              let li = document.createElement('li')
+              li.innerText = dName
+              li.className = 'list-group-item'
+              addName.appendChild(li)
+              document.querySelector('#getName').value = ''
+          }
+
+          function genTeam() {
+              document.querySelector('#teamList').innerHTML = ''
+              let e = document.querySelector('#inputGroupSelect04').value;
+              //let f = document.querySelector('#insertInto').value;
+              //var teamNum = e.options[e.selectedIndex].value;
+              let eInt = parseInt(e)
+              //let fInt = parseInt(f)
+              //console.log(e)
+              
+
+              for (let i = 0; i < eInt; i++) {
+                  teamCol = document.createElement('div')
+                  teamCol.className = 'col'
+                  teamCol.id = `team${i + 1}`
+                  let p = document.createElement('p')
+                  p.innerText = `Team ${i + 1}`
+                  
+                  
+                  let ul = document.createElement('ul')
+                  ul.className = 'list-group'
+
+                  let li = document.createElement('li')
+
+                  //numOfTeams.className = 'col'
+                  //ul.id = `team${i + 1}`
+                  li.className = 'list-group-item'
+                  //li.innerText = 'name1'
+
+                  ul.appendChild(li)
+                  teamCol.appendChild(p)
+                  //teamCol.appendChild(ul)
+                  teamDiv.appendChild(teamCol)
+                  console.log(teamCol)
+              }
+          }
+
+            function assignTeam(){
+                //document.querySelector('#teamList').innerHTML = ''
+                let userTeam = teamDiv.querySelectorAll('.col')
+                let e = document.querySelector('#inputGroupSelect04').value;
+                let f = document.querySelector('#insertInto').value;
+            
+                let eInt = parseInt(e)
+                let fInt = parseInt(f)
+                //console.log(userTeam)
+
+                for (let i = 0; i < userTeam.length; i++) {
+                    //const element = array[i];
+                    //console.log(userTeam[i])
+                    if (userTeam[i].id === `team${fInt}`){
+                        console.log(`team${fInt}`)
+                        console.log(userTeam[i])
+
+                        let li = document.createElement('li')
+
+                        let ul = document.createElement('ul')
+                        ul.className = 'list-group'
+
+                        //     //numOfTeams.className = 'col'
+                        //     //ul.className = 'list-group'
+                        //     //ul.id = `team${i + 1}`
+                            li.className = 'list-group-item'
+                             li.innerText = 'name1'
+
+                             ul.appendChild(li)
+                             userTeam[i].appendChild(ul)
+                             //teamDiv.appendChild(userTeam[i])
+
+                        //userTeam[i].appendChild(li)
+                        // if(ul.id === `team${fInt}`){
+                        //     //let ul = document.createElement('ul')
+                        //     let li = document.createElement('li')
+
+                        //     //numOfTeams.className = 'col'
+                        //     //ul.className = 'list-group'
+                        //     //ul.id = `team${i + 1}`
+                        //     li.className = 'list-group-item'
+                        //     li.innerText = 'name1'
+
+                        //     ul.appendChild(li)
+                        //     teamCol.appendChild(ul)
+                        //     teamDiv.appendChild(teamCol)
+                        // }
+
+                        // //let ul = document.createElement('ul')
+                        // let li = document.createElement('li')
+
+                        // //numOfTeams.className = 'col'
+                        // //ul.className = 'list-group'
+                        // //ul.id = `team${i + 1}`
+                        // li.className = 'list-group-item'
+                        // li.innerText = 'name1'
+
+                        // ul.appendChild(li)
+                        // teamCol.appendChild(ul)
+                        // teamDiv.appendChild(teamCol)
+                    }
+                }
+            }
+
+
+      </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
