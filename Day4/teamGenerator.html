@@ -1,0 +1,232 @@
+<!doctype html>
+<!--
+    WELCOME TO THE STRIVE TEAM GENERATOR!
+    The app is pretty straight forward:
+    - The user can add a list of names
+    - The user can set the number of teams
+    - Every time the user clicks on the "assign" button, a random name is placed in a team and removed from the list
+    - Each team should be inside a "column"
+    - [EXTRA] Create a button to remove an user from a team, putting him back in the main list
+    - [EXTRA] Create a button to reset the state of the app
+-->
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+      <div class="container w-75" id="main">
+        <h1 class="text-center text-uppercase">Random team generator</h1>
+          <div class="row my-3 w-auto">
+              <div class="col">
+                <div class="input-group mb-3">
+                    <input type="text" id="getName" class="form-control" placeholder="Give player name" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" id="button-addon2">Add to List</button>
+                    </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="input-group">
+                    <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                      <option selected>Select number of teams</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                      <option value="4">Four</option>
+                      <option value="5">Five</option>
+                      <option value="6">Six</option>
+                    </select>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" id="createTeam">Create Team</button>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row my-3 w-auto">
+              <div class="col">
+                <button class="btn btn-outline-secondary" type="button" id="assign">Assign</button>
+              </div>
+              <div class="col text-right" id="alert">
+                <button class="btn btn-outline-danger" type="button" id="resign">Resign</button>
+              </div>
+          </div>
+          <div class="row my-3 pb-1 shadow-sm rounded">
+              <div class="col">
+                <p class="text-center mt-3 font-weight-bold">List of Names</p>
+                <ul class="list-group" id="nameList">
+
+                </ul>
+              </div>
+          </div>
+          <div class="row my-3" id="teamList"></div>
+      </div>
+
+      <script>
+          let teamCol
+          let dName
+          let addName
+
+          let teamDiv = document.querySelector('#teamList')
+
+          let nameButton = document.querySelector('#button-addon2');
+          nameButton.addEventListener('click', nameToList);
+          let teamButton = document.querySelector('#createTeam');
+          teamButton.addEventListener('click', genTeam);
+          let assignButton = document.querySelector('#assign');
+          assignButton.addEventListener('click', assignToTeam);
+          let resignButton = document.querySelector('#resign');
+          resignButton.addEventListener('click', resignFromTeam);
+
+          function nameToList() {
+              dName = document.querySelector('#getName').value
+              addName = document.querySelector('#nameList')
+              let li = document.createElement('li')
+              if (dName !== '') {
+                li.innerText = dName
+                li.className = 'list-group-item'
+                addName.appendChild(li)
+                document.querySelector('#getName').value = ''
+              }
+          }
+
+          function genTeam() {
+              teamDiv.innerHTML = ''
+              let e = document.querySelector('#inputGroupSelect04').value;
+              let eInt = parseInt(e)
+
+              for (let i = 0; i < eInt; i++) {
+                  teamCol = document.createElement('div')
+                  teamCol.className = 'col shadow-sm pb-1 rounded text-center'
+                  teamCol.id = `team${i + 1}`
+                  let p = document.createElement('p')
+                  p.innerText = `Team ${i + 1}`
+                  
+                  let ul = document.createElement('ul')
+                  ul.className = 'list-group'
+
+                  let li = document.createElement('li')
+
+                  li.className = 'list-group-item'
+
+                  ul.appendChild(li)
+                  teamCol.appendChild(p)
+                  teamDiv.appendChild(teamCol)
+                  //console.log(teamCol)
+              }
+              document.querySelector('#inputGroupSelect04').value = 'Select number of teams'
+          }
+
+          function assignToTeam(){
+            let arr = []
+            addName = document.querySelector('#nameList')
+            let names = addName.querySelectorAll('.list-group-item')
+
+            for (let i = 0; i < names.length; i++) {
+              arr.push(names[i].innerText)
+            }
+              //console.log(arr)
+              if (arr.length > 0) {
+                var randName = arr[Math.floor(Math.random() * arr.length)];
+              }
+              else return
+              //console.log(randName)
+
+              const index = arr.indexOf(randName);
+              if (index > -1) {
+                arr.splice(index, 1);
+              }
+              //console.log(arr)
+
+              let userTeam = teamDiv.querySelectorAll('.col')
+              let randTeam = userTeam[Math.floor(Math.random() * userTeam.length)];
+              //console.log(randTeam)
+
+              let li = document.createElement('li')
+              let ul = document.createElement('ul')
+              ul.className = 'list-group'
+              li.className = 'list-group-item'
+              li.innerText = randName
+
+              ul.appendChild(li)
+              randTeam.appendChild(ul)
+
+              document.querySelector('#nameList').innerHTML = ''
+              for (let i = 0; i < arr.length; i++) {
+                let li = document.createElement('li')
+                li.innerText = arr[i]
+                li.className = 'list-group-item'
+                addName.appendChild(li)
+                
+              }
+          
+          }
+
+            function resignFromTeam(){
+              let teamArr = []
+              let nameArr = []
+
+              let userTeam = teamDiv.querySelectorAll('.col')
+              for (let i = 0; i < userTeam.length; i++) {
+                teamArr.push(userTeam[i])
+              }
+              let randTeam = teamArr[Math.floor(Math.random() * teamArr.length)];
+              let rem = randTeam.querySelectorAll('li')
+
+              while (rem.length < 1) {
+                const index = teamArr.indexOf(randTeam);
+                if (index > -1) {
+                  teamArr.splice(index, 1);
+                }
+                randTeam = teamArr[Math.floor(Math.random() * teamArr.length)];
+                rem = randTeam.querySelectorAll('li')
+              }
+              //console.log(rem)
+
+              for (let i = 0; i < rem.length; i++) {
+                nameArr.push(rem[i].innerText)
+              }
+
+              let remName = nameArr[Math.floor(Math.random() * nameArr.length)];
+              
+              const index = nameArr.indexOf(remName);
+              if (index > -1) {
+                nameArr.splice(index, 1);
+              }
+
+              
+              let p = randTeam.querySelector('p').innerText
+              randTeam.innerText = ''
+              let ul = document.createElement('ul')
+              let pa = document.createElement('p')
+              pa.innerText = p
+              randTeam.appendChild(pa)
+              ul.className = 'list-group'
+              for (let i = 0; i < nameArr.length; i++) {
+                let li = document.createElement('li')
+                li.className = 'list-group-item'
+                li.innerText = nameArr[i]
+                ul.appendChild(li)                
+              }
+              randTeam.appendChild(ul)
+
+              addName = document.querySelector('#nameList')
+              let li = document.createElement('li')
+              li.innerText = remName
+              li.className = 'list-group-item'
+              addName.appendChild(li)
+
+            }
+
+
+      </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

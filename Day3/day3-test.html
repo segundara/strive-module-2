@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--
+
+        ASSIGNMENT RULES
+        - This is exercise should be done in couples
+        - Implement one exercise each
+        - We suggest you to use Slack or Google Hangouts to speak to each other
+
+        - The solution must be pushed to the repository and be available for the tutors by the end of the day
+        - You can ask for tutor's help
+        - You can google / use StackOverflow BUT we suggest you to use just the material provided
+        - To test the page, just open it with your default browser.
+        - Use Bootstrap4 classes to render the page.
+        - Use correctly containers and rows in order to have a great display
+
+
+        You are implementing a website for a Travel Agency.
+        In the page you can add all the destination you'd like to go in the next future!
+
+
+        Ex 1) Implement a navigation bar, connected to all the sections of the page. 
+        Ex 2) Add a logo into the navigation bar 
+        Ex 3) Add a Jumbotron section in which you present name and claim of the tour operator
+        Ex 4) Implement the "Deal of the Week" section. In this section you'll display 4 destinations.
+         In this section you should have:
+            - 4 destinations per row when the screen is very large
+            - 3 destinations per row when you are on a tablet (or a smaller window)
+            - 2 destinations per row when you are on a small screen
+
+        Ex 5) Implement the "Welcome Summer" section. In this section you'll propose 6 destinations
+            In this section you should have:
+                - 6 destinations per row when the screen is very large
+                - 3 destinations per row when you are on a tablet (or a smaller window)
+                - 2 destinations per row when you are on a small screen
+        
+        Ex 6) Implement a "Deal of the day" section. In this section you'll have:
+            - 66% of the page with a picture of the destination
+            - 33% with Name, dates, price and a short description
+
+        Ex 7) Make the "Deal of the day" section disappear when the user is mobile
+        Ex 8) Add to the Welcome Summer destinations a large shadow
+        Ex 9) Create a section Last Minute, in which you'll display the pictures from the destinations as Cards
+        Ex 10) Create a "Testimonial" section, in which the user can find several feedback from fake customers
+        Ex 11) Create a footer with the company information and a button "contact us"
+
+        Ex 11) Create a button next to each section to collapse and reopen the given section
+        Ex 12) Create a method that counts the number of "travels" on the page
+        Ex 13) Create a modal view with a message and a email field
+        Ex 14) When the user clicks on "contact us" the modal is displayed
+        Ex 15) Create a function that adds a "HOT" badge to all the "Welcome Summer" offers
+        Ex 16) Create a function to delete all "cards" from the page
+      -->
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <!-- <style>
+        #weekDeal{
+            max-height: 350px;
+            overflow: hidden;
+        }
+        #weekDeal:hover{
+            overflow:visible
+        }
+    </style> -->
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><img src="https://segundara.github.io/goglobal/img/logo.png" alt="logo" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+
+      <div class="jumbotron text-center">
+        <h1 class="display-4">Prepare to travel again!</h1>
+        <p class="lead">Travels will not finish for ever! Plan your travel now with us! </p>
+        <hr class="my-4">
+        <p>Take a look to our beautiful solutions and be prepared to start another adventure!</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+      </div>
+
+      <div class="container">
+        <p>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#weekDeal" aria-expanded="false" aria-controls="weekDeal">
+                Our Deals For The Week!
+            </button>
+        </p>        
+        <h1 class="text-center my-2">Our Deals For The Week!</h1>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4" id="weekDeal">
+          <div class="col">
+            <h4 class="font-weight-normal text-nowrap" style="max-width: 25%;">Paris</h4>
+            <p class="lead"><img class="img-fluid" src="https://travel.usnews.com/dims4/USNEWS/d757956/2147483647/resize/445x280%5E%3E/crop/445x280/quality/85/?url=https://travel.usnews.com/static-travel/images/destinations/86/gettyimages-532590277_445x280.jpg" alt="logo" /> </p>
+            <hr class="my-4">
+            <p>Every day, the magnetic City of Light draws visitors who travel from around
+               the globe to see iconic attractions like the Eiffel Tower, the Louvre, Le Marais 
+               and the Arc de Triomphe in real life. But what travelers really fall in love 
+               with are the city's quaint cafes, vibrant markets, trendy shopping districts 
+               and unmistakable je ne sais quoi charm</p>
+          </div>
+          <div class="col">
+            <h4 class="font-weight-normal text-nowrap"  style="max-width: 25%;">Rome</h4>
+            <p class="lead"><img class="img-fluid" src="https://travel.usnews.com/dims4/USNEWS/a18121e/2147483647/resize/445x280%5E%3E/crop/445x280/quality/85/?url=https://travel.usnews.com/static-travel/images/destinations/108/main_image_cropped_rome_445x280.jpg" alt="logo" /> </p>
+            <hr class="my-4">
+            <p>When you visit the Eternal City, prepare to cross a few must-see attractions, 
+              including the Colosseum, the Trevi Fountain and the Pantheon, off your bucket list. 
+              Additional treasures like St. Peter's Basilica and the Sistine Chapel can be found 
+              in nearby Vatican City. Escape the tourist crowds with a twilight stroll through the 
+              cobblestone streets of Trastevere. And take time to sample some of Rome's delicacies 
+              at Mercato Centrale Roma</p>
+          </div>
+          <div class="col">
+            <h4 class="font-weight-normal text-nowrap" style="max-width: 25%;">New Zealand</h4>
+            <p class="lead"><img class="img-fluid" src="https://travel.usnews.com/dims4/USNEWS/156072c/2147483647/resize/445x280%5E%3E/crop/445x280/quality/85/?url=https://travel.usnews.com/static-travel/images/destinations/331/edited_south_island_nz_getty_irma_ferreira_445x280.jpg" alt="logo" /> </p>
+            <hr class="my-4">
+            <p>New Zealand's South Island brims with majestic landscapes at every turn, 
+              from dramatic mountains to fjords to glaciers. Here, you can explore Fiordland 
+              National Park, a UNESCO World Heritage Area, or gaze at the starry skies at 
+              Mount John Observatory. You can also indulge your inner daredevil in Queenstown, 
+              explore two of the most accessible glaciers in the world on the west coast or 
+              sample delicious food and wine in Marlborough.</p>
+          </div>
+          <div class="col">
+            <h4 class="font-weight-normal text-nowrap" style="max-width: 25%;">Tahiti</h4>
+            <p class="lead"><img class="img-fluid" src="https://travel.usnews.com/dims4/USNEWS/82cdc34/2147483647/resize/445x280%5E%3E/crop/445x280/quality/85/?url=https://travel.usnews.com/static-travel/images/destinations/288/tahiti_main_getty_samantha_t_photography_edited_445x280.jpg" alt="logo" /> </p>
+            <hr class="my-4">
+            <p>Travel to this island – the largest in French Polynesia – if you've been dreaming 
+              of a vacation spent lazing in a lavish overwater bungalow. Beyond the posh resorts, 
+              Tahiti boasts black sand beaches, a bustling capital and prime snorkeling and surfing 
+              conditions. Luxurious five-star resorts abound here, but the easiest (and cheapest) 
+              way to experience this paradise is on a cruise.</p>
+          </div>
+        </div>
+        <h1 class="text-center my-3">Our Selection For The Summer</h1>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-xl-6 my-2 shadow-lg" id="summerDeal" >
+            
+            <div class="col">
+              <h4 class="font-weight-normal text-nowrap" style="max-width: 25%;">Ibiza</h4>
+              <p class="lead"><img class="img-fluid" src="https://siviaggia.files.wordpress.com/2019/08/ibiza-1.jpg" alt="Ibiza" /> </p>
+              <hr class="my-4">
+              <p>Ibiza is one of the Balearic islands, a Spanish archipelago in the Mediterranean Sea. 
+                  It is famous for the lively nightlife in the cities of Ibiza and Sant Antoni, 
+                  where the main European night clubs move during the summer. 
+                  It also hosts peaceful villages, yoga retreats and beaches, from Platja d'en Bossa, engaged by hotels, 
+                  bars and shops, to sandy beaches surrounded by pine forests that are found all over the coast.</p>
+            </div>
+            <div class="col">
+              <h4 class="font-weight-normal text-nowrap"  style="max-width: 25%;">Canarie Islands</h4>
+              <p class="lead"><img class="img-fluid" src="https://www.zingarate.com/pictures/2018/05/31/canarie_4.jpeg" alt="Canarie islands" /> </p>
+              <hr class="my-4">
+              <p>The Canary Islands, a Spanish archipelago off the northwest coast of Africa, 
+                  are volcanic islands known for their white and black sand beaches. 
+                  The largest island is Tenerife, dominated by Teide, an active and occasionally 
+                  snow-covered volcano which houses an astronomical observatory and is part of the Teide National Park. 
+                  In Santa Cruz de Tenerife, the capital of the island, a great Carnival takes place in the period before 
+                  Lent.</p>
+            </div>
+            <div class="col">
+              <h4 class="font-weight-normal text-nowrap" style="max-width: 25%;">Sardinia</h4>
+              <p class="lead"><img class="img-fluid" src="https://www.sardegnaturismo.it/sites/default/files/styles/larghezza_contenitore/public/attrattori/shutterstock_339256544_c.smeralda_capriccioli_john_walker.jpg?itok=Nxu5YURu" alt="Sardinia Costa Azzurra" /> </p>
+              <hr class="my-4">
+              <p>French Riviera and French Riviera are two terms not always interchangeable used to refer unofficially 
+                  to a portion of the Mediterranean coast belonging to the Provence-Alps-French Riviera region</p>
+            </div>
+            <div class="col">
+              <h4 class="font-weight-normal text-nowrap" style="max-width: 25%;">Lavaredo</h4>
+              <p class="lead"><img class="img-fluid" src="https://www.gelestatic.it/thimg/ssYiAwZSMC6uf-4TgtnkWsMxrEc=/fit-in/960x540/https%3A//www.lastampa.it/image/contentid/policy%3A1.34218832%3A1560977269/WPNX-22294_Lavaredo_parete-nord-862x575.jpg%3Ff%3Ddetail_558%26h%3D720%26w%3D1280%26%24p%24f%24h%24w%3D488b25f" alt="3 cime di Lavaredo" /> </p>
+              <hr class="my-4">
+              <p>The Tre Cime di Lavaredo are among the most famous peaks in the Dolomites, 
+                  on the border of the Sesto Dolomites and Auronzo di Cadore, 
+                  considered among the best known natural wonders in the mountaineering world, 
+                  with the Cima Grande representing one of the classic north faces of the Alps, 
+                  and allow a panoramic view of the surrounding peaks and the Tre Cime Natural Park.</p>
+            </div>
+            <div class="col">
+                <h4 class="font-weight-normal text-nowrap" style="max-width: 25%;">Garda's Lake</h4>
+                <p class="lead"><img class="img-fluid" src="https://www.bresciatourism.it/content/uploads/2017/03/lago-di-garda.jpg" alt="Lago di Garda" /> </p>
+                <hr class="my-4">
+                <p>Lake Garda or Benaco is the largest Italian lake, with an area of approximately 370 km².
+                     Hinge between three regions, Lombardy, Veneto, Trentino-Alto Adige, it is placed in parallel 
+                     with the Adige, from which it is divided by the Monte Baldo massif.</p>
+              </div>
+              <div class="col">
+                <h4 class="font-weight-normal text-nowrap" style="max-width: 25%;">Amsterdam</h4>
+                <p class="lead"><img class="img-fluid" src="https://cdn.getyourguide.com/img/location_img-36-1135383655-148.jpg" alt="Amsterdam" /> </p>
+                <hr class="my-4">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, similique saepe, 
+                    aut aliquid perferendis debitis ducimus quos distinctio fugiat voluptatum architecto 
+                    obcaecati quidem veritatis eum. Natus quidem debitis sunt qui.</p>
+              </div>
+          </div>
+          <!-- Ex 7) Make the "Deal of the day" section disappear when the user is mobile -->
+
+         <div class="d-none d-md-block">
+          <h1 class="text-center my-3">Our Deal for the Day</h1>
+            <div class="row" id="dayDeal">
+              <div class="col-md-8">
+                <img class="img-fluid" src="http://placehold.it/750x500" alt="" />
+              </div>    
+              <div class="col-md-4">
+                <h4>Deal Description</h4>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </p>
+                <h4 class="my-3">Deal Details</h4>
+                <table class="table">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">Place</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Paris</td>
+                      <td>1st of May, 2020 until 30th of May, 2020</td>
+                      <td>500 euros per person</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <h1 class="text-center my-3">Last Minute Section</h1>
+          <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4" id="lastMinute">
+              <div class="col my-2">
+                  <div class="card">
+                      <img src="http://placehold.it/500x300" class="card-img-top" alt="..." />
+                  </div>
+              </div>
+              <div class="col my-2">
+                  <div class="card">
+                    <img src="http://placehold.it/500x300" class="card-img-top" alt="..." />
+                  </div>
+              </div>
+              <div class="col my-2">
+                  <div class="card">
+                    <img src="http://placehold.it/500x300" class="card-img-top" alt="..." />
+                  </div>
+              </div>
+              <div class="col my-2">
+                  <div class="card">
+                    <img src="http://placehold.it/500x300" class="card-img-top" alt="..." />
+                  </div>
+              </div>
+              <div class="col my-2">
+                  <div class="card">
+                    <img src="http://placehold.it/500x300" class="card-img-top" alt="..." />
+                  </div>
+              </div>
+              <div class="col my-2">
+                  <div class="card">
+                    <img src="http://placehold.it/500x300" class="card-img-top" alt="..." />
+                  </div>
+              </div>
+              <div class="col my-2">
+                  <div class="card">
+                    <img src="http://placehold.it/500x300" class="card-img-top" alt="..." />
+                  </div>
+              </div>
+              <div class="col my-2">
+                  <div class="card">
+                    <img src="http://placehold.it/500x300" class="card-img-top" alt="..." />
+                  </div>
+              </div>
+              <div class="col my-2">
+                  <div class="card">
+                    <img src="http://placehold.it/500x300" class="card-img-top" alt="..." />
+                  </div>
+              </div>
+              <div class="col my-2">
+                  <div class="card">
+                    <img src="http://placehold.it/500x300" class="card-img-top" alt="..." />
+                  </div>
+              </div>
+          </div>
+
+          <div id="testimonials my-4">
+              <div class="row py-3">
+                <div class="col-lg-12 text-center">
+                  <h2 class="section-heading">What People Say About Us</h2>
+                  <hr class="my-2">
+                </div>
+              </div>
+              <div class="row py-3">
+                <div class="col-lg-8 text-center m-auto">
+                  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Carousel indicators -->
+                    <ol class="carousel-indicators">
+                      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                      <li data-target="#myCarousel" data-slide-to="1"></li>
+                      <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>   
+                    <!-- Wrapper for carousel items -->
+                    <div class="carousel-inner">
+                      <div class="item carousel-item active">
+                        <!--<div class="img-box"><img src="/examples/images/clients/1.jpg" alt=""></div>-->
+                        <p class="testimonial text-muted mb-0">Wow, where do we begin?  We had the MOST AMAXING trip EVER! it could not have been any better, it was perfecto!</p>
+                        <p class="overview"><b>Paula Wilson</b>, Media Analyst</p>
+                      </div>
+                      <div class="item carousel-item">
+                        <!--<div class="img-box"><img src="/examples/images/clients/2.jpg" alt=""></div>-->
+                        <p class="testimonial text-muted mb-0">I cannot begin to tell you what a great time we had.  The places you chose for us to go, the hotels, the guides, the tours were top notch.</p>
+                        <p class="overview"><b>Antonio Moreno</b>, Web Developer</p>
+                      </div>
+                      <div class="item carousel-item">
+                        <!--<div class="img-box"><img src="/examples/images/clients/3.jpg" alt=""></div>-->
+                        <p class="testimonial text-muted mb-0">Never could I have imagined the wonderful experiences that awaited me. Best experience ever. Simply amazing, rewarding, nourishing, rich and vibrant.</p>
+                        <p class="overview"><b>Michael Holz</b>, Seo Analyst</p>
+                      </div>
+                    </div>
+                    <!-- Carousel controls -->
+                    <!-- <a class="carousel-control left carousel-control-prev" href="#myCarousel" data-slide="prev">
+                      <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a class="carousel-control right carousel-control-next" href="#myCarousel" data-slide="next">
+                      <i class="fa fa-angle-right"></i>
+                    </a> -->
+                  </div>
+                </div>
+              </div>
+          </div>
+          <!-- Footer -->
+            <footer class="page-footer font-small unique-color-dark pt-4 shadow-lg">
+
+                <!-- Footer Elements -->
+                <div class="container">
+            
+                <!-- Call to action -->
+                <ul class="list-unstyled list-inline text-center py-2">
+                    <li class="list-inline-item">
+                    <h5 class="mb-1">Register for free</h5>
+                    </li>
+                    <li class="list-inline-item">
+                    <a href="#!" class="btn btn-outline-primary btn-rounded">Contact us!</a>
+                    </li>
+                </ul>
+                <!-- Call to action -->
+            
+                </div>
+                <!-- Footer Elements -->
+            
+                <!-- Copyright -->
+                <div class="footer-copyright text-center py-3">© 2020 Copyright:
+                <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+                </div>
+                <!-- Copyright -->
+            
+            </footer>
+            <!-- Footer -->
+        </div>   
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
