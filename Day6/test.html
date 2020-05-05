@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+    function tableCreate() {
+  var body = document.getElementsByTagName("body")[0];
+
+  var tbl = document.createElement("table");
+  var tblBody = document.createElement("tbody");
+
+  for (var j = 0; j <= 10; j++) {
+    var row = document.createElement("tr");
+
+    for (var i = 0; i <10; i++) {
+      var cell = document.createElement("td");
+      var button = document.createElement("button");
+      button.innerHTML = j +"-"+i;
+      cell.appendChild(button);
+      row.appendChild(cell);
+    }
+    tblBody.appendChild(row);
+  }
+  tbl.appendChild(tblBody);
+  body.appendChild(tbl);
+  tbl.setAttribute("border", "2");
+  
+  tbl.addEventListener('click', function(e) {
+    if( e.target.nodeName.toLowerCase() == 'button') {
+      console.log( e.target.parentNode.parentNode.rowIndex, e.target.parentNode.cellIndex );
+    }
+  })
+}
+tableCreate();
+    </script>
+</body>
+</html>
